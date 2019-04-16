@@ -111,43 +111,35 @@ var json = { pages: [
     ]
 };
 
-
-
 window.survey = new Survey.Model(json);
 
 survey.onComplete.add(function(result) {
     var results = JSON.stringify(result.data)
     
+
     // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
 
     document.querySelector('#surveyResult').innerHTML = "result: " + results[18] + ", " + results[27]+ ", " + results[36]+ ", " + results[45]+ ", " + results[54] + ", "
      + results[63] + ", " + results[72] + ", " + results[81] + ", " + results[90] + ", " + results[100];
+    //  var friends = require("C:\Users\Ondel\Desktop\ProjectOne\FriendFinder\app\data\friends.js");
 
-     
+    //  document.querySelector('#results-modal').innerHTML = results
+    document.querySelector('#results-modal').innerHTML = "result: " + JSON.stringify(result.data);
 
-   
-    var friends = require("..\app\data\friends.js");
-    module.exports = function(app) { document.querySelector('#results-modal').innerHTML = "result: " + friends.score[0];
-}
 });
 
 
+// function array() {
 
-//friendA = 1, 2, 3, 4, 5, 4, 3, 2, 1, 2
 
-//friendB = 1, 5, 2, 2, 1, 5, 4, 1, 2, 5 
+// }
+// 1, 2, 3, 4, 5, 4, 3, 2, 1, 2
 
-//find the difference between A and B
+// 1, 5, 2, 2, 1, 5, 4, 1, 2, 5  
+
 // 0, -3, 1, 2, 4, -1, -1, 1, -1, -3
 
-//translate all differeces to a positve integer
-// // 0, 3, 1, 2, 4, 1, 1, 1, 1, 3
-
-//sum of the differences 
-// '17'
-
-//Do for all friends and find friend with the lowest sum
-
+// 0,
 
 
 // document.querySelector('#results-modal').innerHTML = "result: " + results[18] + results[27] + results[36] + results[45] + results[54] + +results[63] + results[72] 
@@ -164,6 +156,11 @@ survey.onComplete.add(function(result) {
 
 
 // result: {"qa":"steve","qb":"25","qc":"http://www.thesmokinggun.com/sites/default/files/imagecache/670xX/photos/hlocklearmug3.jpg","Quality":{"q1":"1","q2":"1","q3":"1","q4":"1","q5":"1","q6":"1","q7":"1","q8":"1","q9":"1","q10":"1"}}
+
+
+$("#surveyElement").Survey({ 
+    model: survey 
+});
 
 
 </script>
