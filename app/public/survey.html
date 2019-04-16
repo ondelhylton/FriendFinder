@@ -41,6 +41,8 @@
                                 <div id="surveyElement">
                                     </div>
                             <div id="surveyResult"></div>
+                            <div id="results-modal"></div>
+                            <!-- <div id="surveyFormatted"></div> -->
                     
                         </div>
                       </div>
@@ -61,30 +63,6 @@
       </footer>
       </div>
 
-
-      <!-- Modal -->
-  <div id="results-modal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-    
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">×</button>
-              <h2 class="modal-title"><strong>Best Match</strong></h2>
-            </div>
-            <div class="modal-body">
-              <h2 id="match-name"></h2>
-              <img id="match-img" src="./survey page_files/3435aa3.jpg" alt="">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-    
-        </div>
-      </div>
-
-
     </body>
 </html>
 
@@ -104,11 +82,11 @@ Survey.StylesManager.applyTheme("bootstrapmaterial");
 var json = { pages: [
         {questions: [
 
-            { type: "text", name: "qa", title:"What is your name?"},
+            { type: "text", value: "q11", title:"What is your name?"},
 
-            { type: "text", name: "qb", title:"What is your age?"},
+            { type: "text", value: "q12", title:"What is your age?"},
 
-            { type: "text", name: "qc", title:"Link to Photo Image (Required)"},
+            { type: "text", value: "q13", title:"Link to Photo Image (Required)"},
 
             { type: "matrix", name: "Quality", title: "Indicate how strongly you agree or disagree with the following statements",
                 columns: [{ value: 1, text: "Strongly Disagree" }, 
@@ -133,17 +111,59 @@ var json = { pages: [
     ]
 };
 
+
+
 window.survey = new Survey.Model(json);
+
 survey.onComplete.add(function(result) {
-    document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
+    var results = JSON.stringify(result.data)
+    
+    // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(result.data);
+
+    document.querySelector('#surveyResult').innerHTML = "result: " + results[18] + ", " + results[27]+ ", " + results[36]+ ", " + results[45]+ ", " + results[54] + ", "
+     + results[63] + ", " + results[72] + ", " + results[81] + ", " + results[90] + ", " + results[100];
+
+     
+
+   
+    var friends = require("..\app\data\friends.js");
+    module.exports = function(app) { document.querySelector('#results-modal').innerHTML = "result: " + friends.score[0];
+}
 });
 
 
-$("#surveyElement").Survey({ 
-    model: survey 
-});
+
+//friendA = 1, 2, 3, 4, 5, 4, 3, 2, 1, 2
+
+//friendB = 1, 5, 2, 2, 1, 5, 4, 1, 2, 5 
+
+//find the difference between A and B
+// 0, -3, 1, 2, 4, -1, -1, 1, -1, -3
+
+//translate all differeces to a positve integer
+// // 0, 3, 1, 2, 4, 1, 1, 1, 1, 3
+
+//sum of the differences 
+// '17'
+
+//Do for all friends and find friend with the lowest sum
 
 
+
+// document.querySelector('#results-modal').innerHTML = "result: " + results[18] + results[27] + results[36] + results[45] + results[54] + +results[63] + results[72] 
+//     + results[81] + results[90] + results[99] + results[108];
+
+    
+    // var answers = result.data
+    // for (var i =0; i < answers.length; i=i+2) {
+    //     newResult = "i2===" + i;
+    // }
+    // document.querySelector('#surveyResult').innerHTML = "result: " + JSON.stringify(answers);
+    
+
+
+
+// result: {"qa":"steve","qb":"25","qc":"http://www.thesmokinggun.com/sites/default/files/imagecache/670xX/photos/hlocklearmug3.jpg","Quality":{"q1":"1","q2":"1","q3":"1","q4":"1","q5":"1","q6":"1","q7":"1","q8":"1","q9":"1","q10":"1"}}
 
 
 </script>
